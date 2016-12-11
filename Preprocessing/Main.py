@@ -16,11 +16,11 @@ class Main():
     
     def textverarbeitung(self):
         import TextVerarbeitung as T
-        content = T.TextVerarbeitung().open('B00TX5O8WE.csv')
+        content = T.TextVerarbeitung().open('galaxy_s7.csv')
         content = T.TextVerarbeitung().remove_entities(content)
         print 'Verbliebene Entities:'
         T.TextVerarbeitung().check_text(content)
-        T.TextVerarbeitung().write('B00TX5O8WE_sauber.csv', content)
+        T.TextVerarbeitung().write('galaxy_s7_sauber.csv', content)
 
 
 Main()
