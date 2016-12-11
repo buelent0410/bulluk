@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 
 import codecs
-import htmlentitydefs, re
+import re
 
 
 class TextVerarbeitung():
@@ -9,48 +9,49 @@ class TextVerarbeitung():
         pass
 
     def remove_entities(self, text):
-        #print text[:10]
-        #text = re.sub('&([^;]+);', lambda m: unichr(htmlentitydefs.name2codepoint[m.group(1)]), text)
-        #=======================================================================
-        # print text.encode('utf-8')
-        # text = text.replace('<br />','')
-        # text = text.replace('&#34;','"')
-        # text = text.replace('&eacute;','e')
-        # text = text.replace('&egrave;','E')
-        # text = text.replace('&#60;','<')
-        # text = text.replace('&szlig;','ß')
-        # text = text.replace('&uuml;','ü')
-        # text = text.replace('&Auml;','Ä')
-        # text = text.replace('&quot;','"')
-        # text = text.replace('&nbsp;',' ')
-        # text = text.replace('&#62;','>')
-        # text = text.replace('&auml;','ä')
-        # text = text.replace('&ouml;','ö')
-        # text = text.replace('&Uuml;','Ü')
-        # text = text.replace('&Ouml;','Ö')
-        # text = text.replace('&gt;','<')
-        # text = text.replace('&agrave;','E')
-        # text = text.replace('&amp;','&')
-        # text = text.replace('&lt;','<')
-        # text = text.replace('&aacute;','á')
-        # text = text.replace('&iacute;','í')
-        # text = text.replace('&uacute;','ú')
-        #=======================================================================
+        text = text.replace('<br />','')
+        text = text.replace('&#34;','"')
+        text = text.replace('&eacute;','e')
+        text = text.replace('&egrave;','E')
+        text = text.replace('&#60;','<')
+        text = text.replace('&szlig;','ß')
+        text = text.replace('&uuml;','ü')
+        text = text.replace('&Auml;','Ä')
+        text = text.replace('&quot;','"')
+        text = text.replace('&nbsp;',' ')
+        text = text.replace('&#62;','>')
+        text = text.replace('&auml;','ä')
+        text = text.replace('&ouml;','ö')
+        text = text.replace('&Uuml;','Ü')
+        text = text.replace('&Ouml;','Ö')
+        text = text.replace('&gt;','<')
+        text = text.replace('&agrave;','E')
+        text = text.replace('&amp;','&')
+        text = text.replace('&lt;','<')
+        text = text.replace('&aacute;','á')
+        text = text.replace('&iacute;','í')
+        text = text.replace('&uacute;','ú')
         
         return text
     
+    # Diese Funktion schreibt alle entities in der Datei aus.
+    def check_text(self, content):
     
-    def postprocess_text(self, filename):
+        for item in set(re.findall("&[a-zA-Z0-9#]+;", content)):
+            print '%s' % (item)
+
+
+    def open(self, filename):
         f = codecs.open(filename)
         content = f.read()
         f.close()
+        
+        return content
     
-        import re
-        for item in set(re.findall("&[a-zA-Z0-9#]+;", content)):
-            print '%s: %s' % (filename, item)
-    
-        print '%s was successfully created.' % filename
-
+    def write(self, filename, content):
+        g = codecs.open(filename, 'w', 'utf-8-sig')
+        g.write(content.decode('utf-8'))
+        g.close()
 
 #===============================================================================
 # def remove_entities_manually(filename):
