@@ -7,7 +7,8 @@ Created on 10.12.2016
 class Main():
     def __init__(self):
         #self.datenabzug()
-        self.textverarbeitung()
+        #self.textverarbeitung()
+        self.wordwolke()
         pass
         
     def datenabzug(self):
@@ -22,5 +23,8 @@ class Main():
         T.TextVerarbeitung().check_text(content)
         T.TextVerarbeitung().write('galaxy_s7_sauber.csv', content)
 
+    def wordwolke(self):
+        import Wordwolke as W
+        pass
 
 Main()
