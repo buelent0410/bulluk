@@ -1,7 +1,9 @@
 # -*- encoding: utf-8 -*-
 
 import codecs
+import re
 import requests
+from langdetect import detect
 
 
 class Datenabzug():
@@ -78,6 +80,15 @@ class Datenabzug():
                     
                     # get date
                     date = ((review.split(div_tag_date_start)[1].split(div_tag_date_end)[0]).replace('am ','')).decode('utf-8')
+    
+                    # language detection - skip non-German reviews
+                    if not detect(review_text) == "de": continue
+                    
+                    # replace 3 or more characters in a row by max 2 characters in a row
+                    review_text = re.sub(r'(\w)\1{2,}',r'\1\1',review_text)
+                    
+                    # length detection - skip reviews shorter than 10 characters
+                    if len(review_text) < 10: continue
     
                     f.write('%s%s%s%s%s%s%s%s%s%s%s\n' % (str((i-a-1)*10+x), delim, stars, delim, topic, delim, username, delim, date, delim, review_text))
                     x = x + 1
