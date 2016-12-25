@@ -4,7 +4,6 @@ Created on 08.12.2016
 @author: Aydin
 '''
 # Satz- und Wortsegmentierung!
-import nltk
 from nltk.tokenize import sent_tokenize, word_tokenize
 #nltk.download()
  
